@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const port = 8080
 const studentArray = require('./InitialData');
 
-let localStudentArray = [...studentArray];
+const localStudentArray = [...studentArray];
 let maxId = localStudentArray.length;
 
 app.use(express.urlencoded());
@@ -42,6 +42,7 @@ app.post("/api/student", (req,res) => {
      const newId = maxId + 1;
      maxId = newId;
      newStudent.id = newId;
+     newStudent.currentClass = Number(currentClass);
      localStudentArray.push(newStudent);
      res.send({ id: newId});
     }
@@ -62,7 +63,7 @@ app.put("/api/student/:id", (req,res) => {
          res.sendStatus(200);
      }
      else if(!isNulllOrUndefined(currentClass)) {
-        localStudentArray[matchedIdx].currentClass = currentClass;
+        localStudentArray[matchedIdx].currentClass = Number(currentClass);
         res.sendStatus(200);
     }
     else if(!isNulllOrUndefined(division)) {
@@ -83,7 +84,7 @@ app.delete("/api/student/:id", (req,res) => {
     if(matchedIdx === -1){
         res.sendStatus(404);
     } else{
-    localStudentArray = localStudentArray.splice(matchedIdx , 1);
+    localStudentArray.splice(matchedIdx , 1);
     res.sendStatus(200);
     }
 });
