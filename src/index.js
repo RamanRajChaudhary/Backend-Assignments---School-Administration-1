@@ -50,7 +50,7 @@ app.post("/api/student", (req,res) => {
 app.put("/api/student/:id", (req,res) => {
     const idToSearch = req.params.id;
     const update = req.body;
-    const {name, currentClass, division } = newStudent;
+    const {name, currentClass, division } = update;
     const matchedIdx = localStudentArray.findIndex(
     (student) => student.id === Number(idToSearch)
     );
