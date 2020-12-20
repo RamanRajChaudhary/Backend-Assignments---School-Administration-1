@@ -58,22 +58,24 @@ app.put("/api/student/:id", (req,res) => {
     if(matchedIdx === -1){
         res.sendStatus(400);
     } else{
+        if(isNulllOrUndefined(name) && isNulllOrUndefined(currentClass) && isNulllOrUndefined(division) ) {
+            res.sendStatus(400);
+        }else {
      if(!isNulllOrUndefined(name)) {
          localStudentArray[matchedIdx].name = name;
          res.sendStatus(200);
      }
-     else if(!isNulllOrUndefined(currentClass)) {
+     if(!isNulllOrUndefined(currentClass)) {
         localStudentArray[matchedIdx].currentClass = Number(currentClass);
         res.sendStatus(200);
     }
-    else if(!isNulllOrUndefined(division)) {
+    if(!isNulllOrUndefined(division)) {
         localStudentArray[matchedIdx].division = division;
         res.sendStatus(200);
     }
-    else {
-        res.sendStatus(400);
+        res.sendStatus(200);
     }
-    }
+  }
 });
 
 app.delete("/api/student/:id", (req,res) => {
